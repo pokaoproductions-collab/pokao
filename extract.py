@@ -10,22 +10,26 @@ soup = BeautifulSoup(r.text, "html.parser")
 debut = soup.find(id="nouveaute-debut")
 fin = soup.find(id="nouveaute-fin")
 
-# Remonter 3 niveaux au lieu de 2
-def get_bloc(el):
-    p = el.find_parent("div", class_="wcustomhtml")
-    return p.parent.parent if p else None
+# Remonter jusqu'à wsite-section pour chacun
+def get_section(el):
+    parent = el
+    while parent:
+        parent = parent.parent
+        if parent and parent.get("class") and "wsite-section" in parent.get("class"):
+            return parent
+    return None
 
-bloc_debut = get_bloc(debut)
-bloc_fin = get_bloc(fin)
+section_debut = get_section(debut)
+section_fin = get_section(fin)
 
-print("=== bloc_debut class:", bloc_debut.get("class") if bloc_debut else "None")
-print("=== bloc_fin class:", bloc_fin.get("class") if bloc_fin else "None")
-print("=== meme element?", bloc_debut == bloc_fin)
+print("=== section_debut class:", section_debut.get("class") if section_debut else "None")
+print("=== section_fin class:", section_fin.get("class") if section_fin else "None")
+print("=== meme element?", section_debut == section_fin)
 
 contenu_html = ""
-el = bloc_debut.next_sibling
+el = section_debut.next_sibling
 while el:
-    if el == bloc_fin:
+    if el == section_fin:
         break
     contenu_html += str(el)
     el = el.next_sibling
