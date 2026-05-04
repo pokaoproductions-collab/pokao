@@ -10,18 +10,17 @@ soup = BeautifulSoup(r.text, "html.parser")
 debut = soup.find(id="nouveaute-debut")
 fin = soup.find(id="nouveaute-fin")
 
-# Remonter au div wcustomhtml parent
-parent_debut = debut.find_parent("div", class_="wcustomhtml")
-parent_fin = fin.find_parent("div", class_="wcustomhtml")
+parent_debut = debut.find_parent("div", class_="wcustomhtml").parent
+parent_fin = fin.find_parent("div", class_="wcustomhtml").parent
 
-# Remonter encore un niveau (le div englobant)
-bloc_debut = parent_debut.parent
-bloc_fin = parent_fin.parent
-
-# Collecter tout ce qui est entre les deux blocs
 contenu_html = ""
-el = bloc_debut.next_sibling
-while el and el != bloc_fin:
+el = parent_debut.next_sibling
+while el:
+    if el == parent_fin:
+        break
+    # Vérifier aussi si on trouve nouveaute-fin à l'intérieur
+    if hasattr(el, 'find') and el.find(id="nouveaute-fin"):
+        break
     contenu_html += str(el)
     el = el.next_sibling
 
