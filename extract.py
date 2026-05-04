@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import re
 
 url = "https://bakasabl.weebly.com/ess.html"
 r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -12,8 +11,12 @@ fin = soup.find(id="nouveaute-fin")
 
 contenu_html = ""
 if debut and fin:
-    el = debut.next_sibling
-    while el and el != fin:
+    # Remonter au bloc parent Weebly
+    parent_debut = debut.find_parent("div", class_="wcustomhtml").parent.parent
+    parent_fin = fin.find_parent("div", class_="wcustomhtml").parent.parent
+    
+    el = parent_debut.next_sibling
+    while el and el != parent_fin:
         contenu_html += str(el)
         el = el.next_sibling
 
@@ -26,4 +29,4 @@ data = {
 with open("nouveaute.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 
-print("OK")
+print("OK - contenu extrait:", len(contenu_html), "caractères")
