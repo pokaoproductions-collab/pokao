@@ -9,16 +9,38 @@ soup = BeautifulSoup(r.text, "html.parser")
 debut = soup.find(id="nouveaute-debut")
 fin = soup.find(id="nouveaute-fin")
 
-# Afficher toute la chaîne de parents de debut
-print("=== PARENTS DE DEBUT:")
-el = debut
-for i in range(10):
-    el = el.parent
-    if el is None:
-        break
-    print(f"  niveau {i+1}: tag={el.name} class={el.get('class')} id={el.get('id')}")
+# Remonter au niveau wsite-section
+def get_section(el):
+    parent = el
+    while parent:
+        parent = parent.parent
+        if parent and parent.get("class") and "wsite-section" in parent.get("class"):
+            return parent
+    return None
 
-data = {"titre": "Nouveauté", "contenu": "", "lien_site": url}
+section_debut = get_section(debut)
+section_fin = get_section(fin)
+
+print("=== SECTION DEBUT trouvée:", section_debut is not None)
+print("=== SECTION FIN trouvée:", section_fin is not None)
+
+contenu_html = ""
+el = section_debut.next_sibling
+count = 0
+while el and el != section_fin and count < 50:
+    contenu_html += str(el)
+    el = el.next_sibling
+    count += 1
+
+print("=== CONTENU longueur:", len(contenu_html))
+
+data = {
+    "titre": "Nouveauté",
+    "contenu": contenu_html.strip(),
+    "lien_site": url
+}
+
 with open("nouveaute.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
+
 print("OK")
