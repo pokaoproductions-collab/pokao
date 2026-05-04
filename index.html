@@ -4,70 +4,35 @@
   <meta charset="UTF-8">
   <title>Nouveauté</title>
   <style>
-    body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
-    #contenu { line-height: 1.6; }
-    .chargement { color: #888; }
-    img { max-width: 100%; }
+    body { font-family: Georgia, serif; max-width: 700px; margin: 60px auto; padding: 20px; color: #222; }
+    h1 { font-size: 1.8em; margin-bottom: 10px; }
+    img { max-width: 100%; margin: 20px 0; border-radius: 4px; }
+    p { line-height: 1.7; font-size: 1.1em; }
+    a.bouton {
+      display: inline-block; margin-top: 30px; padding: 10px 20px;
+      background: #444; color: white; text-decoration: none; border-radius: 4px;
+    }
+    a.bouton:hover { background: #222; }
   </style>
 </head>
 <body>
-  <div id="contenu"><p class="chargement">Chargement en cours…</p></div>
+  <div id="contenu"><p>Chargement…</p></div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const weeblyUrl = params.get("url");
-    const marqueurDebut = params.get("debut");
-    const marqueurFin = params.get("fin");
-
-    if (!weeblyUrl) {
-      document.getElementById("contenu").innerHTML = "<p>Aucune URL fournie.</p>";
-    } else {
-      fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(weeblyUrl))
-        .then(r => r.json())
-        .then(data => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(data.contents, "text/html");
-
-          // Cherche tous les éléments textuels
-          const allElements = Array.from(doc.body.querySelectorAll("*"));
-
-          let capture = false;
-          let html = "";
-
-          for (const el of allElements) {
-            const texte = el.textContent.trim();
-
-            // Début : quand on trouve le marqueur de début
-            if (!capture && marqueurDebut && texte.includes(marqueurDebut)) {
-              capture = true;
-            }
-
-            // Fin : quand on trouve le marqueur de fin
-            if (capture && marqueurFin && texte.includes(marqueurFin) && texte !== marqueurDebut) {
-              break;
-            }
-
-            if (capture) {
-              html += el.outerHTML;
-            }
-          }
-
-          // Si pas de marqueurs, affiche le contenu principal
-          if (!html) {
-            const bloc =
-              doc.querySelector(".wsite-content") ||
-              doc.querySelector("article") ||
-              doc.querySelector("main") ||
-              doc.body;
-            html = bloc.innerHTML;
-          }
-
-          document.getElementById("contenu").innerHTML = html;
-        })
-        .catch(() => {
-          document.getElementById("contenu").innerHTML = "<p>Impossible de charger la page.</p>";
-        });
-    }
+    fetch("nouveaute.json?v=" + Date.now())
+      .then(r => r.json())
+      .then(d => {
+        document.title = d.titre;
+        document.getElementById("contenu").innerHTML = `
+          <h1>${d.titre}</h1>
+          ${d.image ? `<img src="${d.image}" alt="${d.titre}">` : ""}
+          <p>${d.texte}</p>
+          <a class="bouton" href="${d.lien_site}" target="_blank">Voir sur le site complet →</a>
+        `;
+      })
+      .catch(() => {
+        document.getElementById("contenu").innerHTML = "<p>Erreur de chargement.</p>";
+      });
   </script>
 </body>
 </html>
