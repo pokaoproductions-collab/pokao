@@ -10,7 +10,6 @@ soup = BeautifulSoup(r.text, "html.parser")
 debut = soup.find(id="nouveaute-debut")
 fin = soup.find(id="nouveaute-fin")
 
-# Remonter jusqu'à wsite-section pour chacun
 def get_section(el):
     parent = el
     while parent:
@@ -19,20 +18,26 @@ def get_section(el):
             return parent
     return None
 
-section_debut = get_section(debut)
-section_fin = get_section(fin)
+section = get_section(debut)
 
-print("=== section_debut class:", section_debut.get("class") if section_debut else "None")
-print("=== section_fin class:", section_fin.get("class") if section_fin else "None")
-print("=== meme element?", section_debut == section_fin)
+# Parcourir tous les éléments directs de wsite-section-elements
+elements = section.find("div", class_="wsite-section-elements")
+if not elements:
+    elements = section
 
+capture = False
 contenu_html = ""
-el = section_debut.next_sibling
-while el:
-    if el == section_fin:
+
+for child in elements.children:
+    if not hasattr(child, 'find'):
+        continue
+    if child.find(id="nouveaute-debut"):
+        capture = True
+        continue
+    if child.find(id="nouveaute-fin"):
         break
-    contenu_html += str(el)
-    el = el.next_sibling
+    if capture:
+        contenu_html += str(child)
 
 contenu_html = contenu_html.replace('src="/uploads/', f'src="{base_url}/uploads/')
 print("=== CONTENU longueur:", len(contenu_html))
