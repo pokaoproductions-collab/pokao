@@ -18,13 +18,11 @@ el = parent_debut.next_sibling
 while el:
     if el == parent_fin:
         break
-    # Vérifier aussi si on trouve nouveaute-fin à l'intérieur
-    if hasattr(el, 'find') and el.find(id="nouveaute-fin"):
+    if hasattr(el, 'find_all') and el.find(id="nouveaute-fin"):
         break
     contenu_html += str(el)
     el = el.next_sibling
 
-# Corriger les chemins d'images relatifs
 contenu_html = contenu_html.replace('src="/uploads/', f'src="{base_url}/uploads/')
 
 print("=== CONTENU longueur:", len(contenu_html))
