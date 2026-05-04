@@ -9,7 +9,6 @@ soup = BeautifulSoup(r.text, "html.parser")
 debut = soup.find(id="nouveaute-debut")
 fin = soup.find(id="nouveaute-fin")
 
-# Collecter tous les éléments entre les deux balises dans tout le document
 contenu_html = ""
 capture = False
 for el in soup.find_all(True):
@@ -18,14 +17,9 @@ for el in soup.find_all(True):
         continue
     if el.get("id") == "nouveaute-fin":
         break
-    if capture and el.parent and el.parent.get("id") != "nouveaute-debut":
-        # Prendre seulement les éléments de haut niveau (pas les enfants déjà inclus)
-        if not any(p.get("id") in ["nouveaute-debut", "nouveaute-fin"] 
-                   for p in el.parents):
-            contenu_html += str(el)
-
-print("=== CONTENU longueur:", len(contenu_html))
-print("=== CONTENU:", contenu_html[:500])
+    if capture and not any(p.get("id") in ["nouveaute-debut", "nouveaute-fin"]
+                           for p in el.parents):
+        contenu_html += str(el)
 
 data = {
     "titre": "Nouveauté",
@@ -35,4 +29,4 @@ data = {
 
 with open("nouveaute.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
-print("OK")
+print("OK -", len(contenu_html), "caractères extraits")
