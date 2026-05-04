@@ -7,6 +7,7 @@
     body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
     #contenu { line-height: 1.6; }
     .chargement { color: #888; }
+    img { max-width: 100%; }
   </style>
 </head>
 <body>
@@ -15,6 +16,8 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     const weeblyUrl = params.get("url");
+    const marqueurDebut = params.get("debut");
+    const marqueurFin = params.get("fin");
 
     if (!weeblyUrl) {
       document.getElementById("contenu").innerHTML = "<p>Aucune URL fournie.</p>";
@@ -25,15 +28,41 @@
           const parser = new DOMParser();
           const doc = parser.parseFromString(data.contents, "text/html");
 
-          // Récupère le premier article ou section principale
-          const bloc =
-            doc.querySelector("article") ||
-            doc.querySelector(".blog-post") ||
-            doc.querySelector(".wsite-content") ||
-            doc.querySelector("main") ||
-            doc.body;
+          // Cherche tous les éléments textuels
+          const allElements = Array.from(doc.body.querySelectorAll("*"));
 
-          document.getElementById("contenu").innerHTML = bloc.innerHTML;
+          let capture = false;
+          let html = "";
+
+          for (const el of allElements) {
+            const texte = el.textContent.trim();
+
+            // Début : quand on trouve le marqueur de début
+            if (!capture && marqueurDebut && texte.includes(marqueurDebut)) {
+              capture = true;
+            }
+
+            // Fin : quand on trouve le marqueur de fin
+            if (capture && marqueurFin && texte.includes(marqueurFin) && texte !== marqueurDebut) {
+              break;
+            }
+
+            if (capture) {
+              html += el.outerHTML;
+            }
+          }
+
+          // Si pas de marqueurs, affiche le contenu principal
+          if (!html) {
+            const bloc =
+              doc.querySelector(".wsite-content") ||
+              doc.querySelector("article") ||
+              doc.querySelector("main") ||
+              doc.body;
+            html = bloc.innerHTML;
+          }
+
+          document.getElementById("contenu").innerHTML = html;
         })
         .catch(() => {
           document.getElementById("contenu").innerHTML = "<p>Impossible de charger la page.</p>";
