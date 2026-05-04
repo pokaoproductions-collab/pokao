@@ -10,29 +10,31 @@ soup = BeautifulSoup(r.text, "html.parser")
 debut = soup.find(id="nouveaute-debut")
 fin = soup.find(id="nouveaute-fin")
 
-parent_debut = debut.find_parent("div", class_="wcustomhtml").parent
-parent_fin = fin.find_parent("div", class_="wcustomhtml").parent
+# Remonter au div englobant (2 niveaux au dessus de wcustomhtml)
+def get_bloc(el):
+    p = el.find_parent("div", class_="wcustomhtml")
+    return p.parent if p else None
 
-contenu_html = ""
-el = parent_debut.next_sibling
-while el:
-    if el == parent_fin:
+bloc_debut = get_bloc(debut)
+bloc_fin = get_bloc(fin)
+
+print("=== bloc_debut id:", bloc_debut.get("id") if bloc_debut else "None")
+print("=== bloc_fin id:", bloc_fin.get("id") if bloc_fin else "None")
+print("=== meme element?", bloc_debut == bloc_fin)
+
+# Lister tous les siblings
+el = bloc_debut.next_sibling
+count = 0
+while el and count < 20:
+    tag = el.name if hasattr(el, 'name') else "texte"
+    ids = el.get("id") if hasattr(el, 'get') else ""
+    print(f"  sibling {count}: {tag} id={ids} == fin? {el == bloc_fin}")
+    if el == bloc_fin:
         break
-    if hasattr(el, 'find_all') and el.find(id="nouveaute-fin"):
-        break
-    contenu_html += str(el)
     el = el.next_sibling
+    count += 1
 
-contenu_html = contenu_html.replace('src="/uploads/', f'src="{base_url}/uploads/')
-
-print("=== CONTENU longueur:", len(contenu_html))
-
-data = {
-    "titre": "Nouveauté",
-    "contenu": contenu_html.strip(),
-    "lien_site": url
-}
-
+data = {"titre": "Nouveauté", "contenu": "", "lien_site": url}
 with open("nouveaute.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 print("OK")
