@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Nouveauté</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
+    #contenu { line-height: 1.6; }
+    .chargement { color: #888; }
+  </style>
+</head>
+<body>
+  <div id="contenu"><p class="chargement">Chargement en cours…</p></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const weeblyUrl = params.get("url");
+
+    if (!weeblyUrl) {
+      document.getElementById("contenu").innerHTML = "<p>Aucune URL fournie.</p>";
+    } else {
+      fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(weeblyUrl))
+        .then(r => r.json())
+        .then(data => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data.contents, "text/html");
+
+          // Récupère le premier article ou section principale
+          const bloc =
+            doc.querySelector("article") ||
+            doc.querySelector(".blog-post") ||
+            doc.querySelector(".wsite-content") ||
+            doc.querySelector("main") ||
+            doc.body;
+
+          document.getElementById("contenu").innerHTML = bloc.innerHTML;
+        })
+        .catch(() => {
+          document.getElementById("contenu").innerHTML = "<p>Impossible de charger la page.</p>";
+        });
+    }
+  </script>
+</body>
+</html>
