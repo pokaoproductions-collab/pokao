@@ -7,7 +7,6 @@ base_url = "https://bakasabl.weebly.com"
 r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
 soup = BeautifulSoup(r.text, "html.parser")
 
-debut = soup.find(id="nouveaute-debut")
 fin = soup.find(id="nouveaute-fin")
 
 def get_section(el):
@@ -18,7 +17,7 @@ def get_section(el):
             return parent
     return None
 
-section = get_section(debut)
+section = get_section(fin)
 elements = section.find("div", class_="wsite-section-elements") or section
 
 conteneur = None
@@ -27,17 +26,24 @@ for child in elements.children:
         conteneur = child
         break
 
-# Afficher les enfants directs du conteneur
-print("=== ENFANTS DU CONTENEUR:")
-for i, child in enumerate(conteneur.children):
-    if hasattr(child, 'get'):
-        has_debut = bool(child.find(id="nouveaute-debut")) if hasattr(child, 'find') else False
-        has_fin = bool(child.find(id="nouveaute-fin")) if hasattr(child, 'find') else False
-        print(f"  {i}: class={child.get('class')} debut={has_debut} fin={has_fin} contenu={str(child)[:80]}")
-    else:
-        print(f"  {i}: texte")
+# Prendre tout jusqu'à l'enfant qui contient nouveaute-fin
+contenu_html = ""
+for child in conteneur.children:
+    if not hasattr(child, 'find_all'):
+        continue
+    if child.find(id="nouveaute-fin"):
+        break
+    contenu_html += str(child)
 
-data = {"titre": "Nouveauté", "contenu": "", "lien_site": url}
+contenu_html = contenu_html.replace('src="/uploads/', f'src="{base_url}/uploads/')
+print("=== CONTENU longueur:", len(contenu_html))
+
+data = {
+    "titre": "Nouveauté",
+    "contenu": contenu_html.strip(),
+    "lien_site": url
+}
+
 with open("nouveaute.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 print("OK")
