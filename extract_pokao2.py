@@ -41,3 +41,5 @@ data = {"titre": "Nouveauté", "contenu": "", "lien_site": url}
 with open("nouveaute_pokao2.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 print("OK")
+print("=== CONTENU COMPLET DU CONTENEUR:")
+print(str(conteneur)[:2000])
