@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Nouveauté POKAO</title>
+  <style>
+    body { font-family: Georgia, serif; max-width: 700px; margin: 60px auto; padding: 20px; color: #222; }
+    h1 { font-size: 1.8em; margin-bottom: 15px; }
+    p { line-height: 1.8; font-size: 1.1em; white-space: pre-line; }
+    a.bouton {
+      display: inline-block; margin-top: 30px; padding: 12px 24px;
+      background: #444; color: white; text-decoration: none; border-radius: 4px;
+    }
+    a.bouton:hover { background: #222; }
+  </style>
+</head>
+<body>
+  <div id="contenu"><p>Chargement…</p></div>
+  <script>
+    fetch("nouveaute_pokao.json?v=" + Date.now())
+      .then(r => r.json())
+      .then(d => {
+        document.title = d.titre + " — POKAO";
+        document.getElementById("contenu").innerHTML = `
+          <h1>${d.titre}</h1>
+          <p>${d.texte}</p>
+          <a class="bouton" href="${d.lien}" target="_blank">Voir l'animation →</a>
+        `;
+      });
+  </script>
+</body>
+</html>
