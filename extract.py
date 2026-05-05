@@ -19,17 +19,14 @@ def get_section(el):
     return None
 
 section = get_section(debut)
-
-# Parcourir tous les éléments directs de wsite-section-elements
-elements = section.find("div", class_="wsite-section-elements")
-if not elements:
-    elements = section
+elements = section.find("div", class_="wsite-section-elements") or section
 
 capture = False
 contenu_html = ""
 
 for child in elements.children:
-    if not hasattr(child, 'find'):
+    # Ignorer les noeuds texte
+    if not hasattr(child, 'find_all'):
         continue
     if child.find(id="nouveaute-debut"):
         capture = True
