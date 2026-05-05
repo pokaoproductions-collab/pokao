@@ -17,7 +17,7 @@
       display: block;
     }
     a.bouton {
-      display: inline-block; margin: 10px 20px; padding: 10px 20px;
+      display: inline-block; margin-bottom: 15px; padding: 10px 20px;
       background: #444; color: white; text-decoration: none; border-radius: 4px;
       font-size: 0.9em;
     }
@@ -29,7 +29,8 @@
     fetch("nouveaute_pokao.json?v=" + Date.now())
       .then(r => r.json())
       .then(d => {
-       document.getElementById("contenu").innerHTML = `
+        document.title = d.titre + " — POKAO";
+        document.getElementById("contenu").innerHTML = `
           <div id="entete">
             <h1>${d.titre}</h1>
             <p>${d.texte}</p>
@@ -37,3 +38,7 @@
           </div>
           <iframe src="${d.lien}" allowfullscreen></iframe>
         `;
+      });
+  </script>
+</body>
+</html>
