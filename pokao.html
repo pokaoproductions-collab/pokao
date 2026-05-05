@@ -10,13 +10,17 @@
     #entete { padding: 20px; max-width: 800px; margin: 0 auto; }
     h1 { font-size: 1.5em; margin-bottom: 10px; }
     p { line-height: 1.8; font-size: 1em; white-space: pre-line; margin-bottom: 15px; }
-    iframe {
+    #iframe-wrapper {
       width: 100%;
       max-width: 800px;
+      margin: 0 auto;
       height: calc(100vh - 180px);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
       border: none;
       display: block;
-      margin: 0 auto;
     }
     a.bouton {
       display: inline-block; margin-bottom: 15px; padding: 10px 20px;
@@ -35,12 +39,3 @@
         document.getElementById("contenu").innerHTML = `
           <div id="entete">
             <h1>${d.titre}</h1>
-            <p>${d.texte}</p>
-            <a class="bouton" href="${d.lien}" target="_blank">Plein écran →</a>
-          </div>
-          <iframe src="${d.lien}" allowfullscreen></iframe>
-        `;
-      });
-  </script>
-</body>
-</html>
