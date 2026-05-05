@@ -23,9 +23,11 @@ jobs:
         run: |
           python extract.py
           python extract_pokao.py
+          python extract_pokao2.py
 
       - name: Sauvegarder le résultat
         run: |
+          git add nouveaute.json nouveaute_pokao.json nouveaute_pokao2.json
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add nouveaute.json nouveaute_pokao.json
