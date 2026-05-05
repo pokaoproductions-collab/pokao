@@ -19,8 +19,10 @@ jobs:
       - name: Installer dépendances
         run: pip install requests beautifulsoup4
 
-      - name: Lancer le script
-        run: python extract.py
+      - name: Lancer les scripts
+        run: |
+          python extract.py
+          python extract_pokao.py
 
       - name: Sauvegarder le résultat
         run: |
