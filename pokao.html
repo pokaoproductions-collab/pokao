@@ -29,7 +29,11 @@
     fetch("nouveaute_pokao.json?v=" + Date.now())
       .then(r => r.json())
       .then(d => {
-        document.title = d.titre + " — POKAO";
-        document.getElementById("contenu").innerHTML = `
+       document.getElementById("contenu").innerHTML = `
           <div id="entete">
-            <h1>${d.titre}
+            <h1>${d.titre}</h1>
+            <p>${d.texte}</p>
+            <a class="bouton" href="${d.lien}" target="_blank">Plein écran →</a>
+          </div>
+          <iframe src="${d.lien}" allowfullscreen></iframe>
+        `;
