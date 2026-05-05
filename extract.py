@@ -20,12 +20,11 @@ def get_section(el):
 section = get_section(debut)
 elements = section.find("div", class_="wsite-section-elements") or section
 
-print("=== NOMBRE D'ENFANTS:", len(list(elements.children)))
 for i, child in enumerate(elements.children):
     if hasattr(child, 'get'):
-        print(f"  enfant {i}: class={child.get('class')} contient_debut={bool(child.find(id='nouveaute-debut') if hasattr(child,'find') else False)}")
-    else:
-        print(f"  enfant {i}: texte='{str(child)[:20]}'")
+        print(f"=== enfant {i}:")
+        print(str(child)[:300])
+        print("---")
 
 data = {"titre": "Nouveauté", "contenu": "", "lien_site": url}
 with open("nouveaute.json", "w", encoding="utf-8") as f:
