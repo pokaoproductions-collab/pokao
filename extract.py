@@ -21,38 +21,23 @@ def get_section(el):
 section = get_section(debut)
 elements = section.find("div", class_="wsite-section-elements") or section
 
-# L'enfant 7 contient tout — on le trouve comme le div qui contient nouveaute-fin
 conteneur = None
 for child in elements.children:
     if hasattr(child, 'find_all') and child.find(id="nouveaute-fin"):
         conteneur = child
         break
 
-print("=== CONTENEUR trouvé:", conteneur is not None)
+# Afficher les enfants directs du conteneur
+print("=== ENFANTS DU CONTENEUR:")
+for i, child in enumerate(conteneur.children):
+    if hasattr(child, 'get'):
+        has_debut = bool(child.find(id="nouveaute-debut")) if hasattr(child, 'find') else False
+        has_fin = bool(child.find(id="nouveaute-fin")) if hasattr(child, 'find') else False
+        print(f"  {i}: class={child.get('class')} debut={has_debut} fin={has_fin} contenu={str(child)[:80]}")
+    else:
+        print(f"  {i}: texte")
 
-# Extraire les wcustomhtml entre debut et fin dans ce conteneur
-capture = False
-contenu_html = ""
-for child in conteneur.children:
-    if not hasattr(child, 'find_all'):
-        continue
-    if child.find(id="nouveaute-debut"):
-        capture = True
-        continue
-    if child.find(id="nouveaute-fin"):
-        break
-    if capture:
-        contenu_html += str(child)
-
-contenu_html = contenu_html.replace('src="/uploads/', f'src="{base_url}/uploads/')
-print("=== CONTENU longueur:", len(contenu_html))
-
-data = {
-    "titre": "Nouveauté",
-    "contenu": contenu_html.strip(),
-    "lien_site": url
-}
-
+data = {"titre": "Nouveauté", "contenu": "", "lien_site": url}
 with open("nouveaute.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 print("OK")
