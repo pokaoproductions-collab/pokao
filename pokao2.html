@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouveauté POKAO</title>
+  <style>
+    body { font-family: Georgia, serif; max-width: 700px; margin: 60px auto; padding: 20px; color: #222; }
+    h2 { font-size: 1.8em; margin-bottom: 10px; }
+    img { max-width: 100%; margin: 20px 0; border-radius: 4px; display: block; }
+    .paragraph { line-height: 1.7; font-size: 1.1em; margin: 15px 0; }
+    .wcustomhtml { margin: 10px 0; }
+    a.bouton {
+      display: inline-block; margin-top: 30px; padding: 10px 20px;
+      background: #444; color: white; text-decoration: none; border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="contenu"><p>Chargement…</p></div>
+  <script>
+    fetch("nouveaute_pokao2.json?v=" + Date.now())
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById("contenu").innerHTML =
+          d.contenu +
+          `<a class="bouton" href="${d.lien_site}" target="_blank">Voir sur le site →</a>`;
+      });
+  </script>
+</body>
+</html>
