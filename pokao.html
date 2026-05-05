@@ -22,11 +22,6 @@
       border: none;
       display: block;
     }
-    a.bouton {
-      display: inline-block; margin-bottom: 15px; padding: 10px 20px;
-      background: #444; color: white; text-decoration: none; border-radius: 4px;
-      font-size: 0.9em;
-    }
   </style>
 </head>
 <body>
@@ -39,3 +34,13 @@
         document.getElementById("contenu").innerHTML = `
           <div id="entete">
             <h1>${d.titre}</h1>
+            <p>${d.texte}</p>
+          </div>
+          <div id="iframe-wrapper">
+            <iframe src="${d.lien}" allowfullscreen></iframe>
+          </div>
+        `;
+      });
+  </script>
+</body>
+</html>
