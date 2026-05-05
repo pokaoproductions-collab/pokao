@@ -2,40 +2,34 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nouveauté POKAO</title>
   <style>
-    body { font-family: Georgia, serif; max-width: 800px; margin: 60px auto; padding: 20px; color: #222; }
-    h1 { font-size: 1.8em; margin-bottom: 15px; }
-    p { line-height: 1.8; font-size: 1.1em; white-space: pre-line; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Georgia, serif; color: #222; }
+    #entete { padding: 20px; max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 1.5em; margin-bottom: 10px; }
+    p { line-height: 1.8; font-size: 1em; white-space: pre-line; margin-bottom: 15px; }
     iframe {
       width: 100%;
-      height: 90vh;
+      height: calc(100vh - 180px);
       border: none;
-      margin-top: 20px;
-      border-radius: 4px;
+      display: block;
     }
     a.bouton {
-      display: inline-block; margin-top: 20px; padding: 12px 24px;
+      display: inline-block; margin: 10px 20px; padding: 10px 20px;
       background: #444; color: white; text-decoration: none; border-radius: 4px;
       font-size: 0.9em;
     }
   </style>
 </head>
 <body>
-  <div id="contenu"><p>Chargement…</p></div>
+  <div id="contenu"><p style="padding:20px">Chargement…</p></div>
   <script>
     fetch("nouveaute_pokao.json?v=" + Date.now())
       .then(r => r.json())
       .then(d => {
         document.title = d.titre + " — POKAO";
         document.getElementById("contenu").innerHTML = `
-          <h1>${d.titre}</h1>
-          <p>${d.texte}</p>
-          <iframe src="${d.lien}" allowfullscreen></iframe>
-          <br>
-          <a class="bouton" href="${d.lien}" target="_blank">Ouvrir en plein écran →</a>
-        `;
-      });
-  </script>
-</body>
-</html>
+          <div id="entete">
+            <h1>${d.titre}
