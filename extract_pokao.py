@@ -15,7 +15,7 @@ scenes_raw = match.group(1)
 
 # Chercher l'élément avec nouveaute: true
 match_scene = re.search(
-    r'\{[^}]*nouveaute\s*:\s*true[^}]*\}',
+    r'\{[^}]*"nouveaute"\s*:\s*true[^}]*\}',
     scenes_raw,
     re.DOTALL
 )
