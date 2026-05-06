@@ -26,9 +26,9 @@ if not match_scene:
 scene_raw = match_scene.group(0)
 
 # Extraire title, text, src
-title = re.search(r'title\s*:\s*["`\'](.*?)["`\']', scene_raw)
-text = re.search(r'text\s*:\s*`(.*?)`', scene_raw, re.DOTALL)
-src = re.search(r'src\s*:\s*["`\'](.*?)["`\']', scene_raw)
+title = re.search(r'"title"\s*:\s*"(.*?)"', scene_raw)
+text = re.search(r'"text"\s*:\s*"(.*?)"', scene_raw, re.DOTALL)
+src = re.search(r'"src"\s*:\s*"(.*?)"', scene_raw)
 
 data = {
     "titre": title.group(1) if title else "",
