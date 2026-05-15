@@ -1,45 +1,52 @@
 import requests
-import re
+from bs4 import BeautifulSoup, Comment
 import json
 
 url = "https://pokao.weebly.com/anim-animaux.html"
 r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+soup = BeautifulSoup(r.text, "html.parser")
 
-# Extraire le bloc NSE_SCENES du JavaScript
-match = re.search(r'window\.NSE_SCENES\s*=\s*(\[.*?\]);', r.text, re.DOTALL)
-if not match:
-    print("NSE_SCENES non trouvé")
+# Chercher le commentaire <!-- NOUVEAUTE -->
+comments = soup.find_all(string=lambda t: isinstance(t, Comment))
+marker = None
+for c in comments:
+    if c.strip() == "NOUVEAUTE":
+        marker = c
+        break
+
+if not marker:
+    print("Commentaire <!-- NOUVEAUTE --> non trouvé")
     exit(1)
 
-scenes_raw = match.group(1)
-
-# Chercher l'élément avec nouveaute: true
-match_scene = re.search(
-    r'\{[^}]*"nouveaute"\s*:\s*true[^}]*\}',
-    scenes_raw,
-    re.DOTALL
-)
-if not match_scene:
-    print("Aucune scène avec nouveaute: true")
+# La section est le nœud suivant du commentaire
+section = marker.find_next_sibling()
+if not section:
+    print("Aucun élément après <!-- NOUVEAUTE -->")
     exit(1)
 
-scene_raw = match_scene.group(0)
+# Extraire titre, texte, src iframe
+title_tag = section.find(class_="nse-title")
+text_tag  = section.find(class_="nse-text")
+iframe    = section.find("iframe", class_="nse-anim")
 
-# Extraire title, text, src
-title = re.search(r'"title"\s*:\s*"(.*?)"', scene_raw)
-text = re.search(r'"text"\s*:\s*"(.*?)"', scene_raw, re.DOTALL)
-src = re.search(r'"src"\s*:\s*"(.*?)"', scene_raw)
+titre = title_tag.get_text(strip=True) if title_tag else ""
+texte = text_tag.get_text(" ", strip=True) if text_tag else ""
+lien  = iframe["src"] if iframe and iframe.get("src") else ""
+
+print("=== TITRE:", titre)
+print("=== TEXTE:", texte[:100])
+print("=== LIEN:",  lien)
+
+if not titre and not lien:
+    print("Données vides — vérifier la structure HTML")
+    exit(1)
 
 data = {
-    "titre": title.group(1) if title else "",
-    "texte": text.group(1).strip() if text else "",
-    "lien": src.group(1) if src else "",
+    "titre": titre,
+    "texte": texte,
+    "lien":  lien,
     "lien_site": url
 }
-
-print("=== TITRE:", data["titre"])
-print("=== TEXTE:", data["texte"][:100])
-print("=== LIEN:", data["lien"])
 
 with open("nouveaute_pokao.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
