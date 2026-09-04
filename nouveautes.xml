@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>Le petit monde de Pokao — Nouveautés</title>
+  <link>https://pokao.pages.dev/</link>
+  <description>Les dernières nouveautés du site POKAO.</description>
+  <language>fr-fr</language>
+  <item>
+    <title>Créagésin'Art 2026</title>
+    <link>https://pokao.pages.dev/festiv-creagesi26.html</link>
+    <guid isPermaLink="false">festiv-creagesi26.html</guid>
+    <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+    <description>L'exposition Art pour tous mettait à l'honneur le sculpteur Michaël Ezanno.<br/><img src="https://pokao.pages.dev/uploads/creagesi26-affiche.jpg" alt=""/></description>
+  </item>
+</channel></rss>
