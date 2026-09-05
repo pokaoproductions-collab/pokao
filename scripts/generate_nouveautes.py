@@ -207,7 +207,7 @@ def ajouter_lien_retour(soup):
         "font-family:Arial,Helvetica,sans-serif;"
     )
     lien = soup.new_tag("a", href=SITE_URL)
-    lien.string = "← Retour sur pokao.pages.dev"
+    lien.string = "← Voir sur le site Pokao"
     lien["style"] = "color:#a6432c;text-decoration:none;font-weight:bold;"
     bloc.append(lien)
     body.append(bloc)
