@@ -1,2 +1,10 @@
-[]
-  
+[
+  {
+    "titre": "Créagésin'Art 2026",
+    "url": "festiv-creagesi26.html",
+    "image": "uploads/creagesi26-affiche.jpg",
+    "texte": "Créagésin'Art 2026 : exposition Arts pour tous à Aizenay, mettant à l'honneur le sculpteur Michaël Ezanno.",
+    "date": "2026-09-05",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/festiv-creagesi26-autonome.html"
+  }
+]
