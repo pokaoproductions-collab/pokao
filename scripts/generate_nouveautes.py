@@ -194,6 +194,25 @@ def nettoyer_page_autonome(soup):
             transformer_en_span(a)
 
 
+def ajouter_lien_retour(soup):
+    """Ajoute, tout en bas de la page, un lien de retour vers le site
+    principal — pour que quelqu'un qui reçoit cette page par e-mail
+    puisse toujours revenir facilement sur pokao.pages.dev."""
+    body = soup.find("body")
+    if not body:
+        return
+    bloc = soup.new_tag("div")
+    bloc["style"] = (
+        "text-align:center;padding:32px 16px;margin-top:24px;"
+        "font-family:Arial,Helvetica,sans-serif;"
+    )
+    lien = soup.new_tag("a", href=SITE_URL)
+    lien.string = "← Retour sur pokao.pages.dev"
+    lien["style"] = "color:#a6432c;text-decoration:none;font-weight:bold;"
+    bloc.append(lien)
+    body.append(bloc)
+
+
 def absolutiser_chemins(soup):
     """Toutes les images/scripts/styles de la page autonome pointent
     en absolu vers le site en ligne (elle ne vit pas à côté du site,
@@ -218,6 +237,7 @@ def generer_page_autonome(nom_fichier, soup):
     DOSSIER_AUTONOME.mkdir(exist_ok=True)
     nom_sortie = re.sub(r"\.html?$", "", nom_fichier) + "-autonome.html"
     nettoyer_page_autonome(soup)
+    ajouter_lien_retour(soup)
     absolutiser_chemins(soup)
     html_final = str(soup)
     if not html_final.lstrip().lower().startswith("<!doctype"):
