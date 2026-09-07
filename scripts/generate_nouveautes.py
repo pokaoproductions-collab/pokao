@@ -68,6 +68,11 @@ SITEMAP_URL = SITE_URL.rstrip("/") + "/sitemap.xml"
 # branch" > main > / (root).
 PAGES_URL = "https://pokaoproductions-collab.github.io/pokao/"
 
+# Nom de fichier fixe pour la page autonome : toujours le même,
+# écrasé à chaque nouvelle nouveauté. Adresse stable :
+# https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html
+NOM_PAGE_AUTONOME = "quoideneuf.html"
+
 FICHIER_JSON = RACINE / "data" / "nouveautes.json"
 FICHIER_MANIFEST = RACINE / "data" / "nouveautes-manifest.json"
 FICHIER_RSS = RACINE / "nouveautes.xml"
@@ -207,7 +212,7 @@ def ajouter_lien_retour(soup):
         "font-family:Arial,Helvetica,sans-serif;"
     )
     lien = soup.new_tag("a", href=SITE_URL)
-    lien.string = "← Voir sur le site Pokao"
+    lien.string = "← Retour sur pokao.pages.dev"
     lien["style"] = "color:#a6432c;text-decoration:none;font-weight:bold;"
     bloc.append(lien)
     body.append(bloc)
@@ -235,7 +240,7 @@ def absolutiser_chemins(soup):
 
 def generer_page_autonome(nom_fichier, soup):
     DOSSIER_AUTONOME.mkdir(exist_ok=True)
-    nom_sortie = re.sub(r"\.html?$", "", nom_fichier) + "-autonome.html"
+    nom_sortie = NOM_PAGE_AUTONOME  # toujours le même nom : écrase la précédente
     nettoyer_page_autonome(soup)
     ajouter_lien_retour(soup)
     absolutiser_chemins(soup)
