@@ -84,6 +84,28 @@ ENTETES = {"User-Agent": "Mozilla/5.0 (robot-nouveautes-pokao)"}
 
 
 # ----------------------------------------------------------------------
+# Anti-doublon : une page = une seule nouveauté dans la liste
+# ----------------------------------------------------------------------
+
+def dedupliquer_par_url(entrees):
+    """Ne garde qu'une seule entrée par page (url), la plus récente.
+    Comme la liste est toujours triée de la plus récente à la plus
+    ancienne, on garde simplement la première occurrence rencontrée
+    pour chaque url et on jette les suivantes. Cela répare aussi tout
+    seul d'éventuels doublons déjà présents dans le fichier (par
+    exemple si le manifeste a été modifié à la main entre deux
+    passages du robot)."""
+    vues = set()
+    resultat = []
+    for item in entrees:
+        if item["url"] in vues:
+            continue
+        vues.add(item["url"])
+        resultat.append(item)
+    return resultat
+
+
+# ----------------------------------------------------------------------
 # Étape 1 : lire le sitemap en ligne et détecter les nouvelles pages
 # ----------------------------------------------------------------------
 
@@ -336,6 +358,7 @@ def enregistrer_bloc_email(item):
 
 def main():
     entrees = json.loads(FICHIER_JSON.read_text(encoding="utf-8")) if FICHIER_JSON.exists() else []
+    entrees = dedupliquer_par_url(entrees)
 
     try:
         pages_actuelles = set(lister_pages_sitemap())
@@ -371,6 +394,11 @@ def main():
 
         item, soup = extraire_infos_page(nom_fichier, html_brut)
         item["autonome"] = generer_page_autonome(nom_fichier, soup)
+        # Si cette page avait déjà une nouveauté (ex. manifeste modifié
+        # à la main pour forcer un nouveau passage du robot), on la
+        # remplace au lieu de l'ajouter en double : une page = une
+        # nouveauté, toujours à jour, jamais dupliquée.
+        entrees = [e for e in entrees if e["url"] != nom_fichier]
         entrees.insert(0, item)
         enregistrer_bloc_email(item)
         manifest.add(nom_fichier)
