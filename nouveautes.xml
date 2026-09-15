@@ -5,11 +5,11 @@
   <description>Les dernières nouveautés du site POKAO.</description>
   <language>fr-fr</language>
   <item>
-    <title>Créagésin'Art 2026</title>
+    <title>Menez Land'Art 2026</title>
     <link>https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html</link>
-    <guid isPermaLink="false">festiv-creagesi26.html</guid>
-    <pubDate>Mon, 07 Sep 2026 00:00:00 +0000</pubDate>
-    <description>L'exposition Arts pour tous à Aizenay mettait à l'honneur le sculpteur Michaël Ezanno.<br/><img src="https://pokao.pages.dev/uploads/creagesi26-affiche.jpg" alt=""/></description>
+    <guid isPermaLink="false">menez-2026.html</guid>
+    <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+    <description>Menez Land'Art 2026 : le petit festival d'art en version mini à Quimperlé.<br/><img src="https://pokao.pages.dev/uploads/m26-affiche.webp" alt=""/></description>
   </item>
   <item>
     <title>Créagésin'Art 2026</title>
@@ -17,12 +17,5 @@
     <guid isPermaLink="false">festiv-creagesi26.html</guid>
     <pubDate>Mon, 07 Sep 2026 00:00:00 +0000</pubDate>
     <description>L'exposition Arts pour tous à Aizenay mettait à l'honneur le sculpteur Michaël Ezanno.<br/><img src="https://pokao.pages.dev/uploads/creagesi26-affiche.jpg" alt=""/></description>
-  </item>
-  <item>
-    <title>Créagésin'Art 2026</title>
-    <link>https://pokaoproductions-collab.github.io/pokao/autonome/festiv-creagesi26-autonome.html</link>
-    <guid isPermaLink="false">festiv-creagesi26.html</guid>
-    <pubDate>Sat, 05 Sep 2026 00:00:00 +0000</pubDate>
-    <description>Créagésin'Art 2026 : exposition Arts pour tous à Aizenay, mettant à l'honneur le sculpteur Michaël Ezanno.<br/><img src="https://pokao.pages.dev/uploads/creagesi26-affiche.jpg" alt=""/></description>
   </item>
 </channel></rss>

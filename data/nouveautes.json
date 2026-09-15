@@ -1,5 +1,13 @@
 [
   {
+    "titre": "Menez Land'Art 2026",
+    "url": "menez-2026.html",
+    "image": "uploads/m26-affiche.webp",
+    "texte": "Menez Land'Art 2026 : le petit festival d'art en version mini à Quimperlé.",
+    "date": "2026-09-15",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
+  },
+  {
     "titre": "Créagésin'Art 2026",
     "url": "festiv-creagesi26.html",
     "image": "uploads/creagesi26-affiche.jpg",
