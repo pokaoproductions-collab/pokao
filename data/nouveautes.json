@@ -1,5 +1,13 @@
 [
   {
+    "titre": "Rêves de boutiques 3",
+    "url": "boutiques3.html",
+    "image": "uploads/boutik301.jpg",
+    "texte": "JFG n'a pas son pareil pour dénicher d'anciens magasins, commerces oubliés ; ses photos titillent l'inventivité des diablotins.",
+    "date": "2026-09-17",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
+  },
+  {
     "titre": "Menez Land'Art 2026",
     "url": "menez-2026.html",
     "image": "uploads/m26-affiche.webp",
