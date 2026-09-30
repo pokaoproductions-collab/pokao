@@ -5,11 +5,46 @@
   <description>Les dernières nouveautés du site POKAO.</description>
   <language>fr-fr</language>
   <item>
-    <title>Sauvons le timbre rouge</title>
+    <title>Tigres</title>
     <link>https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html</link>
-    <guid isPermaLink="false">blup.html</guid>
-    <pubDate>Mon, 28 Sep 2026 00:00:00 +0000</pubDate>
-    <description>L'avenir du timbre rouge est-il compromis ?</description>
+    <guid isPermaLink="false">tigres.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+    <description>Un tigre sauvage, mais que l'on peut chevaucher...<br/><img src="https://pokao.pages.dev/uploads/tigre1-copier_2.jpg" alt=""/></description>
+  </item>
+  <item>
+    <title>Poissons</title>
+    <link>https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html</link>
+    <guid isPermaLink="false">poissons.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+    <description>Poissons — peinture dans le Petit Monde de Pokao.</description>
+  </item>
+  <item>
+    <title>Oiseaux</title>
+    <link>https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html</link>
+    <guid isPermaLink="false">oiseaux.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+    <description>Domestiqués ou libres comme l'air, les oiseaux aiment être dessinés...<br/><img src="https://pokao.pages.dev/uploads/34-copie-copier_orig.jpg" alt=""/></description>
+  </item>
+  <item>
+    <title>Moutons</title>
+    <link>https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html</link>
+    <guid isPermaLink="false">moutons.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+    <description>On ne peut pas toujours compter sur les moutons...<br/><img src="https://pokao.pages.dev/uploads/29-copie-copier_orig.jpg" alt=""/></description>
+  </item>
+  <item>
+    <title>Locomo-vidéos</title>
+    <link>https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html</link>
+    <guid isPermaLink="false">locomovideo.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+    <description>Cartes pop-up sur le thème de la mer : tea time, la danse des pieuvres, expédition Calypso, le château de sable, la course en bouée, à quoi rêves-tu ?</description>
+  </item>
+  <item>
+    <title>Brooklyn Art Library</title>
+    <link>https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html</link>
+    <guid isPermaLink="false">brooklyn-art-library.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+    <description>The Sketchbook Project : Sentimental piggy, un exemplaire de Sentimental cochon en anglais, dans la bibliothèque collaborative de la Brooklyn Art Library de New York.</description>
   </item>
   <item>
     <title>Menez Land'Art 2026</title>

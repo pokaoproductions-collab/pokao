@@ -1,5 +1,53 @@
 [
   {
+    "titre": "Tigres",
+    "url": "tigres.html",
+    "image": "uploads/tigre1-copier_2.jpg",
+    "texte": "Un tigre sauvage, mais que l'on peut chevaucher...",
+    "date": "2026-09-30",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
+  },
+  {
+    "titre": "Poissons",
+    "url": "poissons.html",
+    "image": "",
+    "texte": "Poissons — peinture dans le Petit Monde de Pokao.",
+    "date": "2026-09-30",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
+  },
+  {
+    "titre": "Oiseaux",
+    "url": "oiseaux.html",
+    "image": "uploads/34-copie-copier_orig.jpg",
+    "texte": "Domestiqués ou libres comme l'air, les oiseaux aiment être dessinés...",
+    "date": "2026-09-30",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
+  },
+  {
+    "titre": "Moutons",
+    "url": "moutons.html",
+    "image": "uploads/29-copie-copier_orig.jpg",
+    "texte": "On ne peut pas toujours compter sur les moutons...",
+    "date": "2026-09-30",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
+  },
+  {
+    "titre": "Locomo-vidéos",
+    "url": "locomovideo.html",
+    "image": "",
+    "texte": "Cartes pop-up sur le thème de la mer : tea time, la danse des pieuvres, expédition Calypso, le château de sable, la course en bouée, à quoi rêves-tu ?",
+    "date": "2026-09-30",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
+  },
+  {
+    "titre": "Brooklyn Art Library",
+    "url": "brooklyn-art-library.html",
+    "image": "",
+    "texte": "The Sketchbook Project : Sentimental piggy, un exemplaire de Sentimental cochon en anglais, dans la bibliothèque collaborative de la Brooklyn Art Library de New York.",
+    "date": "2026-09-30",
+    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
+  },
+  {
     "titre": "Menez Land'Art 2026",
     "url": "menez-2026.html",
     "image": "uploads/m26-affiche.webp",
