@@ -1,13 +1,5 @@
 [
   {
-    "titre": "Tigres",
-    "url": "tigres.html",
-    "image": "uploads/tigre1-copier_2.jpg",
-    "texte": "Un tigre sauvage, mais que l'on peut chevaucher...",
-    "date": "2026-09-30",
-    "autonome": "https://pokaoproductions-collab.github.io/pokao/autonome/quoideneuf.html"
-  },
-  {
     "titre": "Poissons",
     "url": "poissons.html",
     "image": "",
