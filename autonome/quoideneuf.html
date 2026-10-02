@@ -1,40 +1,108 @@
 <!DOCTYPE html>
-<html lang="fr"><head>
-<meta content="2026-10-03" name="pokao-nouveaute-date"/>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Postecume1 - POKAO</title>
-<meta content="Rien ne vaut un beau timbre pour toutes les missives maritimes." name="description"/>
-<link href="https://pokao.pages.dev/assets/css/fonts.css" rel="stylesheet"/>
-<link href="https://pokao.pages.dev/assets/css/home.css" rel="stylesheet"/>
-<link href="https://pokao.pages.dev/assets/css/peintures.css" rel="stylesheet"/>
-<link href="https://pokao.pages.dev/assets/css/artwork.css" rel="stylesheet"/>
-<style id="pokao-editor-tile-image-rules">
-      .paint-grid[data-editor-tile-grid="true"] .paint-tile{aspect-ratio:auto!important;height:auto!important;overflow:visible!important}
-      .paint-grid[data-editor-tile-grid="true"] .paint-tile>img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;display:block!important}
-    </style>
-<!-- POKAO_EDITOR_GRID_CSS_START -->
-<style id="pokao-editor-grid-persistent">
-@media (min-width:1081px){#pokao-editor-grid-1.paint-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
-@media (max-width:700px){#pokao-editor-grid-1.paint-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-.paint-grid[data-editor-tile-grid="true"] .paint-tile{aspect-ratio:auto!important;height:auto!important;overflow:visible!important}
-.paint-grid[data-editor-tile-grid="true"] .paint-tile>img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;display:block!important}
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>La dernière nouveauté — POKAO</title>
+<style>
+html,body{margin:0;min-height:100%;background:#fbfaf5;color:#2b2622;font-family:Arial,Helvetica,sans-serif}
+main{max-width:680px;margin:12vh auto;padding:32px;text-align:center}
+h1{font-family:Georgia,serif;font-weight:500}
+a{color:#a6432c;font-weight:bold}
 </style>
-<!-- POKAO_EDITOR_GRID_CSS_END -->
 </head>
-<body class="" style="background-color: rgb(251, 250, 245);">
-<header class="site-header">
-<span aria-label="Accueil Pokao" class="brand">le petit monde de Pokao</span>
+<body>
+<main>
+  <h1>Le petit monde de Pokao</h1>
+  <p id="etat">Ouverture de la dernière nouveauté…</p>
+  <p><a href="https://pokao.pages.dev/">Voir le site Pokao</a></p>
+</main>
+<script>
+(function () {
+  "use strict";
 
+  var URL_NOUVEAUTES = "../data/nouveautes.json";
+  var URL_PROGRAMMATION = "../data/nouveautes-programmees.json";
+  var SITE = "https://pokao.pages.dev/";
 
-</header>
-<main><section class="paint-hero"><div class="section-inner paint-hero-inner"><p class="eyebrow"><span style="color:inherit;text-decoration:none;">Petite fabrique</span></p><h1 class="">Poste écume 1</h1><p class="">l'océan qui édite ses propres timbres...</p></div></section><div class="paint-grid" data-desktop-columns="4" data-editor-tile-grid="true" id="pokao-editor-grid-1"><span class="paint-tile"><img alt="" class="" loading="lazy" src="https://pokao.pages.dev/uploads/_editor/1790846215077-poste-ecume1-red-orig-gavw.jpg"/></span><span class="paint-tile"><img alt="" class="" loading="lazy" src="https://pokao.pages.dev/uploads/_editor/1790846228889-poste-ecume2-red-orig-gavw.jpg"/></span><span class="paint-tile"><img alt="" class="" loading="lazy" src="https://pokao.pages.dev/uploads/_editor/1790846244092-poste-ecume3-red-orig-gavw.jpg" style="display: block; margin-left: auto; margin-right: auto;"/></span><span class="paint-tile"><img alt="" class="" loading="lazy" src="https://pokao.pages.dev/uploads/_editor/1790846256592-poste-ecume4-red-orig-gavw.jpg"/></span><span class="paint-tile"><img alt="" class="" loading="lazy" src="https://pokao.pages.dev/uploads/_editor/1790846270950-poste-ecume5-red-orig-gavw.jpg"/></span><span class="paint-tile"><img alt="" class="" loading="lazy" src="https://pokao.pages.dev/uploads/_editor/1790846286462-poste-ecume6-red-orig-gavw.jpg"/></span><span class="paint-tile"><img alt="" class="" loading="lazy" src="https://pokao.pages.dev/uploads/_editor/1790846304948-poste-ecume7-red-1-gavw.jpg"/></span><span class="paint-tile"><img alt="" class="" loading="lazy" src="https://pokao.pages.dev/uploads/_editor/1790846316816-poste-ecume8-red-1-gavw.jpg"/></span></div><button aria-label="Plein écran" style="position: fixed; bottom: 16px; right: 16px; z-index: 9999; width: 44px; height: 44px; border-radius: 50%; border: medium; background: rgba(0, 0, 0, 0.55); color: rgb(255, 255, 255); font-size: 20px; line-height: 1; display: none; align-items: center; justify-content: center; cursor: pointer; padding: 0px;" type="button">⛶</button><button aria-label="Plein écran" style="position: fixed; bottom: 16px; right: 16px; z-index: 9999; width: 44px; height: 44px; border-radius: 50%; border: medium; background: rgba(0, 0, 0, 0.55); color: rgb(255, 255, 255); font-size: 20px; line-height: 1; display: none; align-items: center; justify-content: center; cursor: pointer; padding: 0px;" type="button">⛶</button></main>
-<footer class="site-footer footer-img footer-bottom">
-<div class="footer-content">
-<p class="footer-brand">le petit monde de Pokao</p>
+  function cleUrl(v) {
+    return String(v || "").replace(/^https?:\/\/[^/]+\//i, "").replace(/^\/+/, "");
+  }
 
-</div>
-</footer>
+  function heureParis() {
+    var morceaux = new Intl.DateTimeFormat("fr-CA", {
+      timeZone: "Europe/Paris",
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+    }).formatToParts(new Date());
+    var o = {};
+    morceaux.forEach(function (p) { if (p.type !== "literal") o[p.type] = p.value; });
+    return {
+      date: o.year + "-" + o.month + "-" + o.day,
+      minutes: Number(o.hour) * 60 + Number(o.minute)
+    };
+  }
 
-<script src="https://pokao.pages.dev/assets/js/page-fullscreen.js"></script>
-<div style="text-align:center;padding:32px 16px;margin-top:24px;font-family:Arial,Helvetica,sans-serif;"><a href="https://pokao.pages.dev/" style="color:#a6432c;text-decoration:none;font-weight:bold;">Voir sur le site Pokao</a></div></body></html>
+  function getJson(url, facultatif) {
+    return fetch(url + "?t=" + Date.now(), {cache:"no-store"})
+      .then(function (r) {
+        if (!r.ok) {
+          if (facultatif) return [];
+          throw new Error("HTTP " + r.status);
+        }
+        return r.json();
+      })
+      .catch(function (e) {
+        if (facultatif) return [];
+        throw e;
+      });
+  }
+
+  function choisir(nouveautes, programmation) {
+    var maintenant = heureParis();
+    var plan = {};
+    (programmation || []).forEach(function (p) {
+      if (p && p.url) plan[cleUrl(p.url)] = p;
+    });
+
+    var visibles = (nouveautes || []).filter(function (n) {
+      if (!n || !n.url) return false;
+      var p = plan[cleUrl(n.url)];
+      if (!p || !p.date) return true;
+
+      var hm = String(p.heure || "07:00").match(/^(\d{2}):(\d{2})$/);
+      var min = hm ? Number(hm[1]) * 60 + Number(hm[2]) : 420;
+      return p.date < maintenant.date ||
+             (p.date === maintenant.date && maintenant.minutes >= min);
+    }).map(function (n) {
+      var copie = Object.assign({}, n);
+      var p = plan[cleUrl(n.url)];
+      if (p && p.date) copie.date = p.date;
+      return copie;
+    });
+
+    visibles.sort(function (a, b) {
+      var da = String(a.date || "");
+      var db = String(b.date || "");
+      if (da !== db) return da < db ? 1 : -1;
+      return 0;
+    });
+    return visibles[0] || null;
+  }
+
+  Promise.all([
+    getJson(URL_NOUVEAUTES, false),
+    getJson(URL_PROGRAMMATION, true)
+  ]).then(function (r) {
+    var active = choisir(r[0], r[1]);
+    if (!active || !active.url) throw new Error("Aucune nouveauté active");
+    window.location.replace(SITE + cleUrl(active.url));
+  }).catch(function () {
+    document.getElementById("etat").textContent =
+      "La dernière nouveauté n'a pas pu être déterminée. Ouvrez le site Pokao.";
+  });
+}());
+</script>
+</body>
+</html>
