@@ -262,7 +262,7 @@ def absolutiser_chemins(soup):
 
 def generer_page_autonome(nom_fichier, soup):
     DOSSIER_AUTONOME.mkdir(exist_ok=True)
-    nom_sortie = NOM_PAGE_AUTONOME  # toujours le même nom : écrase la précédente
+    nom_sortie = re.sub(r"\\.html?$", "", nom_fichier, flags=re.I) + ".html"  # copie autonome propre à cette nouveauté
     nettoyer_page_autonome(soup)
     ajouter_lien_retour(soup)
     absolutiser_chemins(soup)
