@@ -1,123 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
+<html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="index,follow">
-<meta name="pokao-autonome-version" content="2.23.8.2">
+<meta name="pokao-autonome-version" content="2.23.8.4">
 <title>La dernière nouveauté — POKAO</title>
-<style>
-html,body{margin:0;min-height:100%;background:#fbfaf5;color:#2b2622;font-family:Arial,Helvetica,sans-serif}
-main{max-width:680px;margin:12vh auto;padding:32px;text-align:center}
-h1{font-family:Georgia,serif;font-weight:500}
-a{color:#a6432c;font-weight:bold}
-</style>
-</head>
-<body>
-<main>
-<h1>Le petit monde de Pokao</h1>
-<p id="etat">Ouverture de la dernière nouveauté…</p>
-<p><a href="https://pokao.pages.dev/">Voir le site Pokao</a></p>
-</main>
+<style>html,body{margin:0;min-height:100%;background:#fbfaf5;color:#2b2622;font-family:Arial,Helvetica,sans-serif}main{max-width:680px;margin:12vh auto;padding:32px;text-align:center}h1{font-family:Georgia,serif;font-weight:500}a{color:#a6432c;font-weight:bold}</style>
+</head><body><main><h1>Le petit monde de Pokao</h1><p id="etat">Chargement de la dernière nouveauté…</p><p><a href="https://pokao.pages.dev/">Voir le site Pokao</a></p></main>
 <script>
-(function () {
-  "use strict";
-  var VERSION = "POKAO_AUTONOME_STABLE_V22382";
-  var URL_NOUVEAUTES = "../data/nouveautes.json";
-  var URL_PROGRAMMATION = "../data/nouveautes-programmees.json";
-  var SITE = "https://pokao.pages.dev/";
-
-  function normaliserUrl(v) {
-    return String(v || "")
-      .replace(/^https?:\/\/[^/]+\//i, "")
-      .replace(/^\/+/, "");
-  }
-
-  function heureParis() {
-    var morceaux = new Intl.DateTimeFormat("fr-CA", {
-      timeZone: "Europe/Paris",
-      year: "numeric", month: "2-digit", day: "2-digit",
-      hour: "2-digit", minute: "2-digit", hourCycle: "h23"
-    }).formatToParts(new Date());
-    var o = {};
-    morceaux.forEach(function (p) {
-      if (p.type !== "literal") o[p.type] = p.value;
-    });
-    return {
-      date: o.year + "-" + o.month + "-" + o.day,
-      minutes: Number(o.hour) * 60 + Number(o.minute)
-    };
-  }
-
-  function getJson(url, facultatif) {
-    return fetch(url + "?v=" + Date.now(), {cache:"no-store"})
-      .then(function (r) {
-        if (!r.ok) {
-          if (facultatif) return [];
-          throw new Error("HTTP " + r.status);
-        }
-        return r.json();
-      })
-      .catch(function (e) {
-        if (facultatif) return [];
-        throw e;
-      });
-  }
-
-  function appliquerProgrammation(nouveautes, programmation) {
-    var maintenant = heureParis(), base = {};
-
-    (nouveautes || []).forEach(function (item, ordre) {
-      if (!item || !item.url) return;
-      base[normaliserUrl(item.url)] = Object.assign({}, item, {_ordre: ordre});
-    });
-
-    (programmation || []).forEach(function (p, ordre) {
-      if (!p || !p.url || !p.date) return;
-      var cle = normaliserUrl(p.url);
-      var hm = String(p.heure || "07:00").match(/^(\d{2}):(\d{2})$/);
-      var minutesParution = hm ? Number(hm[1]) * 60 + Number(hm[2]) : 420;
-      var arrivee = p.date < maintenant.date ||
-        (p.date === maintenant.date && maintenant.minutes >= minutesParution);
-
-      if (!arrivee) {
-        delete base[cle];
-        return;
-      }
-
-      var ancienne = base[cle] || {};
-      base[cle] = Object.assign({}, ancienne, {
-        url: p.url,
-        date: p.date,
-        titre: p.titre || ancienne.titre || p.url,
-        image: p.image || ancienne.image || "",
-        texte: p.texte || ancienne.texte || "",
-        _ordre: -100000 + ordre
-      });
-    });
-
-    var visibles = Object.keys(base).map(function (k) { return base[k]; });
-    visibles.sort(function (a,b) {
-      var da=String(a.date||""), db=String(b.date||"");
-      if (da !== db) return da < db ? 1 : -1;
-      return (a._ordre||0)-(b._ordre||0);
-    });
-    return visibles;
-  }
-
-  Promise.all([
-    getJson(URL_NOUVEAUTES, false),
-    getJson(URL_PROGRAMMATION, true)
-  ]).then(function (x) {
-    var liste = appliquerProgrammation(x[0], x[1]);
-    var active = liste[0];
-    if (!active || !active.url) throw new Error("Aucune nouveauté active");
-    window.location.replace(SITE + normaliserUrl(active.url));
-  }).catch(function () {
-    document.getElementById("etat").textContent =
-      "La dernière nouveauté n'a pas pu être déterminée. Ouvrez le site Pokao.";
-  });
+(function(){"use strict";
+var VERSION="POKAO_AUTONOME_AFFICHAGE_V22384",UN="../data/nouveautes.json",UP="../data/nouveautes-programmees.json";
+function norm(v){return String(v||"").replace(/^https?:\/\/[^/]+\//i,"").replace(/^\/+/,"");}
+function nom(u){u=norm(u).split("?")[0].split("#")[0];u=u.substring(u.lastIndexOf("/")+1);return u.replace(/\.html?$/i,"")+".html";}
+function paris(){var p=new Intl.DateTimeFormat("fr-CA",{timeZone:"Europe/Paris",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()),o={};p.forEach(function(x){if(x.type!=="literal")o[x.type]=x.value;});return{date:o.year+"-"+o.month+"-"+o.day,minutes:+o.hour*60+(+o.minute)};}
+function get(u,opt){return fetch(u+"?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok){if(opt)return[];throw Error(r.status);}return r.json();}).catch(function(e){if(opt)return[];throw e;});}
+function calc(ns,ps){var n=paris(),b={};(ns||[]).forEach(function(i,o){if(i&&i.url)b[norm(i.url)]=Object.assign({},i,{_ordre:o});});(ps||[]).forEach(function(p,o){if(!p||!p.url||!p.date)return;var k=norm(p.url),h=String(p.heure||"07:00").match(/^(\d{2}):(\d{2})$/),m=h?+h[1]*60+(+h[2]):420,ok=p.date<n.date||(p.date===n.date&&n.minutes>=m);if(!ok){delete b[k];return;}var a=b[k]||{};b[k]=Object.assign({},a,{url:p.url,date:p.date,_ordre:-100000+o});});var v=Object.keys(b).map(function(k){return b[k];});v.sort(function(a,b){var x=String(a.date||""),y=String(b.date||"");return x!==y?(x<y?1:-1):(a._ordre||0)-(b._ordre||0);});return v;}
+function show(i){return fetch("./"+nom(i.url)+"?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("copie autonome absente");return r.text();}).then(function(h){document.open();document.write(h);document.close();});}
+Promise.all([get(UN,false),get(UP,true)]).then(function(x){var l=calc(x[0],x[1]);if(!l.length)throw Error("aucune nouveauté");return show(l[0]);}).catch(function(){document.getElementById("etat").textContent="La page autonome de la dernière nouveauté est momentanément indisponible.";});
 }());
-</script>
-</body>
-</html>
+</script></body></html>
