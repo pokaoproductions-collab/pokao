@@ -261,17 +261,9 @@ def absolutiser_chemins(soup):
 
 
 def generer_page_autonome(nom_fichier, soup):
-    DOSSIER_AUTONOME.mkdir(exist_ok=True)
-    nom_sortie = re.sub(r"\\.html?$", "", nom_fichier, flags=re.I) + ".html"  # copie autonome propre à cette nouveauté
-    nettoyer_page_autonome(soup)
-    ajouter_lien_retour(soup)
-    absolutiser_chemins(soup)
-    html_final = str(soup)
-    if not html_final.lstrip().lower().startswith("<!doctype"):
-        html_final = "<!DOCTYPE html>\n" + html_final
-    (DOSSIER_AUTONOME / nom_sortie).write_text(html_final, encoding="utf-8")
-    return PAGES_URL.rstrip("/") + "/autonome/" + nom_sortie
-
+    """La page autonome stable est gérée séparément et ne doit jamais être écrasée."""
+    # POKAO_AUTONOME_STABLE_V22383
+    return PAGES_URL.rstrip("/") + "/autonome/" + NOM_PAGE_AUTONOME
 
 # ----------------------------------------------------------------------
 # Étape 4 : flux RSS + bloc email (branchables sur un outil plus tard)
