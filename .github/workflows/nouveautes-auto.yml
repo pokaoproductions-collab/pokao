@@ -10,7 +10,7 @@ name: Robot des nouveautés POKAO
 # de déploiement (zip envoyé à la main sur Cloudflare) ne change pas.
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '5 * * * *'
   workflow_dispatch:
 
 concurrency:
