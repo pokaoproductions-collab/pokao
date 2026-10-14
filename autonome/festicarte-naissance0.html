@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Le petit monde de Pokao</title>
+<meta content="Le petit monde de Pokao : illustrations, peintures, objets, animations et nouveautés." name="description"/>
+<link href="https://pokao.pages.dev/assets/css/fonts.css" rel="stylesheet"/>
+<link href="https://pokao.pages.dev/assets/css/home.css" rel="stylesheet"/>
+<link href="https://pokao.pages.dev/assets/css/peintures.css" rel="stylesheet"/>
+<style>
+    /* Titre de l'accueil : toujours sur une seule ligne, quelle que soit la largeur de fenêtre */
+    #paint-title {
+      white-space: nowrap;
+      font-size: clamp(20px, 6.5vw, 94px);
+      max-width: none;
+      transition: font-size 0.2s;
+    }
+    .hero-wrap { position: relative; }
+    .nouveaute-floatcard {
+      display: none;
+    }
+    .nouveaute-floatcard:has(a) {
+      display: block;
+      position: absolute;
+      top: 20px;
+      right: max(20px, calc((100% - 1120px) / 2 + 20px));
+      width: 420px;
+      max-width: calc(100% - 40px);
+      z-index: 5;
+      animation: nouveaute-pop 0.5s ease-out;
+    }
+    @keyframes nouveaute-pop {
+      from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .nouveaute-floatcard a {
+      display: flex;
+      align-items: stretch;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .nouveaute-floatcard a:hover { box-shadow: 0 14px 36px rgba(0,0,0,0.34); }
+    .nouveaute-floatcard-img {
+      width: 130px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+    .nouveaute-floatcard-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .nouveaute-floatcard-tag {
+      align-self: flex-start;
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #fff;
+      background: #d9822b;
+      padding: 5px 14px;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(217,130,43,0.5);
+    }
+    .nouveaute-floatcard-title {
+      font-family: "Lora", Georgia, serif;
+      font-size: 21px;
+      font-weight: 600;
+      color: #222;
+      line-height: 1.25;
+    }
+    .nouveaute-floatcard-text {
+      font-size: 13px;
+      line-height: 1.4;
+      color: #666;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .paint-hero.has-nouveaute #paint-title {
+      font-size: clamp(20px, 4.4vw, 56px);
+    }
+    .mobile-break { display: none; }
+    @media (max-width: 860px) {
+      .mobile-break { display: initial; }
+      .nouveaute-floatcard:has(a) {
+        top: 12px;
+        right: 12px;
+        width: 52%;
+        min-width: 140px;
+        max-width: 230px;
+      }
+      .nouveaute-floatcard a { flex-direction: column; }
+      .nouveaute-floatcard-img { width: 100%; height: 110px; }
+      .nouveaute-floatcard-body { padding: 10px 12px; gap: 5px; }
+      .nouveaute-floatcard-tag { font-size: 10px; padding: 3px 8px; }
+      .nouveaute-floatcard-title { font-size: 15px; }
+      .nouveaute-floatcard-text {
+        display: -webkit-box;
+        font-size: 11.5px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .paint-hero.has-nouveaute #paint-title {
+        font-size: clamp(20px, 9vw, 40px);
+      }
+    }
+  </style></head>
+<body>
+<header class="site-header">
+<span aria-label="Accueil Pokao" class="brand">le petit monde de Pokao</span>
+
+
+</header>
+<main>
+<div class="hero-wrap">
+<section aria-labelledby="paint-title" class="paint-hero">
+<div class="section-inner paint-hero-inner">
+<h1 id="paint-title">Entrez<br class="mobile-break"/> dans la<br class="mobile-break"/> fabrique</h1>
+</div>
+</section>
+<div class="nouveaute-floatcard" id="nouveaute-card"></div>
+</div>
+<section class="section paint-section">
+<div class="section-inner">
+<div class="paint-grid">
+<span class="paint-tile">
+<img alt="" src="https://pokao.pages.dev/uploads/tuil0_set.webp"/>
+<span>Sets &amp; nappes</span>
+</span>
+<span class="paint-tile">
+<img alt="" src="https://pokao.pages.dev/uploads/tuil0_pop_up.webp"/>
+<span>Pop-up</span>
+</span>
+<span class="paint-tile">
+<img alt="" src="https://pokao.pages.dev/uploads/tuil0_jf_photos.webp"/>
+<span>JF photos</span>
+</span>
+<span class="paint-tile">
+<img alt="" src="https://pokao.pages.dev/uploads/tuil0_timbr.webp"/>
+<span>Timbres</span>
+</span>
+<span class="paint-tile">
+<img alt="" src="https://pokao.pages.dev/uploads/tuil0_festicarte.webp"/>
+<span>Festicartes</span>
+</span>
+<span class="paint-tile">
+<img alt="" src="https://pokao.pages.dev/uploads/tuil0_peintur.webp"/>
+<span>Peintures</span>
+</span>
+<span class="paint-tile">
+<img alt="" src="https://pokao.pages.dev/uploads/meli_melo.webp"/>
+<span>Méli-mélo</span>
+</span>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer footer-img footer-bottom">
+<div class="footer-content">
+<p class="footer-brand">le petit monde de Pokao</p>
+
+</div>
+</footer>
+
+<script src="https://pokao.pages.dev/assets/js/nouveautes-data.js"></script>
+<script src="https://pokao.pages.dev/assets/js/nouveautes-render.js?v=27cebabac3c1"></script>
+<script src="https://pokao.pages.dev/assets/js/page-fullscreen.js"></script>
+<div style="text-align:center;padding:32px 16px;margin-top:24px;font-family:Arial,Helvetica,sans-serif;"><a href="https://pokao.pages.dev/" style="color:#a6432c;text-decoration:none;font-weight:bold;">Voir sur le site Pokao</a></div></body>
+</html>
