@@ -267,6 +267,11 @@ def generer_page_autonome(nom_fichier, soup):
     nettoyer_page_autonome(soup)
     ajouter_lien_retour(soup)
     absolutiser_chemins(soup)
+    # POKAO_AUTONOME_RESPONSIVE_JF_V1 : la copie autonome ne dépend pas du cache CSS.
+    if soup.head and not soup.head.find("style", id="pokao-autonome-responsive-artwork"):
+        regle = soup.new_tag("style", id="pokao-autonome-responsive-artwork")
+        regle.string = '\n/* POKAO : les figures autonomes restent pleine largeur sur smartphone. */\n@media screen and (max-width: 560px) {\n  .artwork-details { grid-template-columns: 1fr !important; }\n  .section-inner > figure.pokao-editor-figure {\n    width: 100% !important;\n    max-width: 100% !important;\n  }\n}\n'
+        soup.head.append(regle)
     html_final = str(soup)
     if not html_final.lstrip().lower().startswith("<!doctype"):
         html_final = "<!DOCTYPE html>\n" + html_final
