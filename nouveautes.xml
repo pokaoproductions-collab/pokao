@@ -5,6 +5,13 @@
   <description>Les dernières nouveautés du site POKAO.</description>
   <language>fr-fr</language>
   <item>
+    <title>Mentions légales</title>
+    <link>https://pokaoproductions-collab.github.io/pokao/autonome/mentions-legales.html</link>
+    <guid isPermaLink="false">mentions-legales.html</guid>
+    <pubDate>Mon, 26 Oct 2026 00:00:00 +0000</pubDate>
+    <description>Mentions légales du site le petit monde de Pokao.</description>
+  </item>
+  <item>
     <title>Naissance</title>
     <link>https://pokaoproductions-collab.github.io/pokao/autonome/festicarte-naissance2.html</link>
     <guid isPermaLink="false">festicarte-naissance2.html</guid>
